@@ -53,9 +53,9 @@ class Create extends Component
 			})
 	}
     //--- Check that any validation errors occure for input field ---//
-	hasErrorFor(fieldName)
+	hasErrorFor(nom)
 	{
-		return !!this.state.errors[fieldName];
+		return !!this.state.errors[nom];
 	}
 	//--- Render error for specific validation fail input field ---//
 	renderErrorFor(fieldName)

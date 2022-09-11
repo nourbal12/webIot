@@ -75,7 +75,9 @@ class Index extends Component
 
     render() {
       return(
+		
           	<div className="card mt-4">
+				
 			    <div className="card-header">
 			        <h4 className="card-title"> Users </h4>
 			        <button type="button" className="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target="#addModal"> Add User </button>
@@ -112,6 +114,7 @@ class Index extends Component
 			    <Create updateState = {this.handleUpdateState} />
 			    <Edit updateState = {this.handleUpdateState} user = {this.state.editUser} />
 			</div>
+			
         )
     }
 }

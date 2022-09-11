@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 /*
@@ -18,3 +18,5 @@ use Illuminate\Http\Request;
 // });
 
 Route::resource('/users', 'UserController');
+Route::resource('/modules', 'ModuleController');
+Route::resource('/values', 'ValueController');
