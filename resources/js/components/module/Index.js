@@ -8,6 +8,7 @@ import '../../../sass/app.scss';
 require('../../bootstrap');
 import 'bootstrap/dist/css/bootstrap.css';
 import Carousel from 'react-bootstrap/Carousel';
+import { CChart } from '@coreui/react-chartjs';
 
 class Index extends Component
 {
@@ -85,16 +86,10 @@ class Index extends Component
       return(
         <>
 		<div style={{backgroundImage:`url("https://img.freepik.com/vecteurs-premium/internet-objets-iot_35632-74.jpg?w=2000")`}}>
-     <div style={{width:700,padding:30,background:"linear-gradient(blue,pink)"}}>
+     <div style={{width:800,padding:30,background:"linear-gradient(blue,pink)"}}>
 				
 	 <Carousel>
-				   <Carousel.Item interval={1500}>
-					   <img
-						   className="d-block w-100"
-						   src="https://www.objetconnecte.com/wp-content/uploads/2021/07/ingestion-donnees-iot-problemes-1.png"
-						   alt="Image One" />
-					   
-				   </Carousel.Item>
+				   
 				   <Carousel.Item interval={500}>
 					   <img
 						   className="d-block w-100"
@@ -146,6 +141,21 @@ class Index extends Component
 					<Edit updateState={this.handleUpdateState} module={this.state.editmodule} />
 
 				</div>
+				
+				<CChart
+  type="bar"
+  data={{
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    datasets: [
+      {
+        label: 'People entering the website',
+        backgroundColor: '#f87979',
+        data: [40, 20, 12, 39, 10, 40, 39, 80, 40],
+      },
+    ],
+  }}
+  labels="months"
+/>
 					 </div></div></>
         )
     }

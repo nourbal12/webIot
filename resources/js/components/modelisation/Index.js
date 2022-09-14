@@ -7,7 +7,7 @@ import { Sidenav, Nav, Dropdown } from 'rsuite';
 import "rsuite/dist/rsuite.min.css";
 import { Bar } from 'react-chartjs-2';
 import {CategoryScale,Chart} from 'chart.js';
-import { Card } from 'react-bootstrap';
+import { Card, CardHeader, CardBody, CardFooter } from 'react-simple-card';
 import {  registerables } from 'chart.js';
 Chart.register(...registerables);
 export const options = {
@@ -85,8 +85,7 @@ class Index extends Component
 			{ field: 'vid', headerName: 'Valeur_Id', width: 150 },
 			{ field: 'mid', headerName: 'Module_id', width: 150 },
 			{ field: 'valeur', headerName: 'Valeur_Mesurée(Donnée envoyée)', width: 150 },
-			{ field: 'Created_at', headerName: 'Historique(Created_At)', width: 150 },]
-		
+			{ field: 'Created_at', headerName: 'Historique(Created_At)', width: 150 }]
 		  
 		const {postsPerPage,currentPage,values}=this.state;
 		const indexOfLastPage=currentPage*postsPerPage;
@@ -100,7 +99,7 @@ class Index extends Component
 				rows={currentPost}
 				pageSize={5}
 				rowsPerPageOptions={[5]}
-				checkboxSelection
+				
 			  />
 			</div>
 		  );
@@ -131,24 +130,17 @@ render() {
 		 <div style={{
       display: 'block', paddingLeft: 0
     }}>
-	<div>
-      <Sidenav defaultOpenKeys={['3', '4']} activeKey="1">
-        <Sidenav.Body>
-          <Nav>
-            <Dropdown eventKey="4" title="Home" onClick={() => this.nextPath('/')}>
-            </Dropdown>
-          </Nav>
-        </Sidenav.Body>
-      </Sidenav>
-    </div>
-		
-		<div style={{width: 600,
-		marginTop:30,
+		<div style={{
+			width:800,
+		marginTop:0,
     marginLeft:' auto',
     marginRight:' auto',
 	backgroundColor:'white'
 	}}>
-		<table className="table table-bordered" id="table-container">
+		<Card>
+			<CardHeader style={{backgroundColor:'rgb(200,200,200)'}}><h6>Tableau des données envoyées par le Module</h6></CardHeader>
+		<CardBody>
+			<table className="table table-bordered" id="table-container">
 
 
 			{this.showpaginData()}
@@ -156,15 +148,21 @@ render() {
 
 
 		</table>
+		</CardBody>
+		</Card>
+
 		</div>
 		
+
 	    <div style={{
     marginLeft:' auto',
-    marginRight:' auto',width: 600,}}>
-		<Card variant="outlined" style={{backgroundColor:'rgb(240,240,240)',boxShadow: ' 0 0 2em white'}} 
-   >
-	 <h6 style={{textAlign:'center',color:'linear-gradient(blue,pink)'}}>Courbe en Ligne de valeurs mesurées au fonction de l'historique</h6>
-		<CChart
+    marginRight:' auto',width: 800,}}>
+
+<Card >
+        <CardHeader style={{backgroundColor:'rgb(200,200,200)'}}>
+			<h6 style={{textAlign:'center'}}>Courbe de lignes  des valeurs mesurées au fonction de l'historique</h6>
+		</CardHeader>
+        <CardBody ><CChart
 				type="line"
 				data={{
 					labels: this.state.values.map(value => value.Created_at),
@@ -178,15 +176,22 @@ render() {
 							data: this.state.values.map(value => value.valeur)
 						},
 					],
-				}} />
-				</Card>
+				}} /></CardBody>
+        <CardFooter style={{backgroundColor:'rgb(200,200,200)'}}> 
+		Courbe de valeurs mesurées(envoyée par le module) en fonction de temps(Historique):
+		Soit x: Created_at Soit y:valeur mesurée ==> f(x)=y
+		</CardFooter>
+    </Card>
+		
+				
 				
 				
 				<hr></hr>
-				
-				<Card variant="outlined" style={{backgroundColor:'rgb(240,240,240)',boxShadow: ' 0 0 2em white'}}>
-				<h6 style={{textAlign:'center'}}>Courbe en batton des valeurs mesurées au fonction de l'historique</h6>
-				<Bar options={options} data={{
+				<Card >
+				<CardHeader style={{backgroundColor:'rgb(200,200,200)'}}>
+			<h6 style={{textAlign:'center'}}>Courbe en batton des valeurs mesurées en fonction de l'historique</h6>
+		</CardHeader>
+		<CardBody ><Bar options={options} data={{
 					labels: this.state.values.map(value => value.Created_at),
 					datasets: [
 						{
@@ -198,7 +203,14 @@ render() {
 							data: this.state.values.map(value => value.valeur)
 						},
 					],
-				}} /></Card></div></div></div>
+				}} /> 
+				</CardBody>
+				<CardFooter style={{backgroundColor:'rgb(200,200,200)'}}> 
+		Courbe de valeurs mesurées(envoyée par le module) en fonction de temps(Historique):
+		Soit x: Created_at Soit y:valeur mesurée ==> f(x)=y
+		</CardFooter>
+				</Card></div> 
+				</div></div>
 				
 </>
 )}
