@@ -1,12 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Module;
 use App\Http\Requests\ValueRequest;
 use App\Value;
+use Illuminate\Support\Facades\DB;
+
 
 class ValueController extends Controller
 {
+    
+
+    public function __construct( ) {
+        
+        
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +23,7 @@ class ValueController extends Controller
     public function index()
     {
         $values = Value::all();
+        $this->simulate();
 
         return $values->toJson();
     }
@@ -38,7 +47,6 @@ class ValueController extends Controller
     public function store(ValueRequest $request)
     {
         $value = Value::create($request->all());
-
         return $value->toJson();
     }
 
@@ -90,5 +98,27 @@ class ValueController extends Controller
         $value->delete();
 
         return response()->json('Delete successful!');
+    }
+
+    public function simulate()
+    {   
+        $modules = Module::all();
+        $moduleLength=count($modules);
+        $mid=rand(1,$moduleLength);
+        $module=Module::where('mid',$mid)->get()->first();
+        $i = 10;
+        while($i >= 0) {
+            DB::table('values')->insert([
+                'mid' => $mid,
+                'valeur' => rand($module['valMin'],$module['valMax'])
+            ]);
+            $i = $i-1;
+          
+        }
+    }
+
+    public function getValuesByMid($id){
+        
+       return Value::where('mid', $id)->get();
     }
 }

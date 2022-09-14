@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-
+use Illuminate\Support\Facades\DB;
 class CreateValuesTable extends Migration
 {
     /**
@@ -16,7 +16,7 @@ class CreateValuesTable extends Migration
         Schema::create('values', function (Blueprint $table) {
             $table->increments('vid');
             $table->float('valeur');
-            $table->timestamp('Created_at')->nullable();
+            $table->timestamp('Created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->integer('mid')->unsigned();
             $table->foreign('mid')->references('mid')->on('modules')->onDelete('cascade');
         }); // //
