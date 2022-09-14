@@ -8,6 +8,8 @@ import "rsuite/dist/rsuite.min.css";
 import { Bar } from 'react-chartjs-2';
 import {CategoryScale,Chart} from 'chart.js';
 import { Card } from 'react-bootstrap';
+import {  registerables } from 'chart.js';
+Chart.register(...registerables);
 export const options = {
 	responsive: true,
 	plugins: {
